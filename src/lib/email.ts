@@ -15,6 +15,8 @@ export interface EnquiryData {
   phone?: string;
   eventDate?: string;
   guestCount?: string;
+  location?: string;
+  eventType?: string;
   message: string;
 }
 
@@ -47,6 +49,8 @@ export async function sendEnquiryEmail(data: EnquiryData): Promise<void> {
     ${data.phone ? `<p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>` : ""}
     ${data.eventDate ? `<p><strong>Event date:</strong> ${escapeHtml(data.eventDate)}</p>` : ""}
     ${data.guestCount ? `<p><strong>Guest count:</strong> ${escapeHtml(data.guestCount)}</p>` : ""}
+    ${data.location ? `<p><strong>Location/Postcode:</strong> ${escapeHtml(data.location)}</p>` : ""}
+    ${data.eventType ? `<p><strong>Event type:</strong> ${escapeHtml(data.eventType)}</p>` : ""}
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
   `;

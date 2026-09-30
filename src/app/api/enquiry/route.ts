@@ -16,7 +16,9 @@ function isValidEnquiry(body: unknown): body is EnquiryData {
     b.message.trim().length > 0 &&
     (b.phone === undefined || typeof b.phone === "string") &&
     (b.eventDate === undefined || typeof b.eventDate === "string") &&
-    (b.guestCount === undefined || typeof b.guestCount === "string")
+    (b.guestCount === undefined || typeof b.guestCount === "string") &&
+    (b.location === undefined || typeof b.location === "string") &&
+    (b.eventType === undefined || typeof b.eventType === "string")
   );
 }
 

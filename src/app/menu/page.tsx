@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getMenuConfig, type GabriellosMenuItem } from "@/lib/db/menuConfig";
 import { getSettings } from "@/lib/db/settings";
+import { BrandFooter } from "@/components/BrandFooter";
 
 export const metadata: Metadata = {
   title: "Catering Menu — Gabriello's",
@@ -18,36 +20,57 @@ export default async function CateringMenuPage() {
 
   return (
     <div className="min-h-screen">
-      <header className="border-b border-border bg-secondary/10">
+      <header className="bg-[#2B2B2B] border-b border-[#F4A261]/20">
         <div className="max-w-[1800px] mx-auto px-6 sm:px-10 py-10 sm:py-14 text-center">
-          <p className="text-xs sm:text-sm uppercase tracking-[0.5em] text-secondary font-medium">
-            Catering
+          <p className="text-xs sm:text-sm uppercase tracking-[0.5em] text-[#F4A261]/80 font-medium">
+            Handmade · Napoletana
           </p>
-          <h1 className="font-serif text-5xl sm:text-6xl xl:text-7xl font-semibold mt-3 text-primary">
-            Il Menù
+          <h1 className="font-script text-6xl sm:text-7xl xl:text-8xl mt-3 -rotate-2 inline-block text-[#F4A261] drop-shadow-md">
+            Gabriello&apos;s
           </h1>
-          <p className="text-muted-foreground text-lg sm:text-xl mt-4 max-w-xl mx-auto italic">
+          <p className="text-[11px] sm:text-sm uppercase tracking-[0.4em] text-[#F4A261]/80 font-medium mt-6">
+            Catering — Il Menù
+          </p>
+          <p className="text-white/70 text-lg sm:text-xl mt-3 italic">
             Choose from our authentic Neapolitan pizzas, made with premium ingredients, for your event.
             {!settings.showPrices && " Pricing provided on request."}
           </p>
         </div>
       </header>
 
-      <main className="max-w-[1800px] mx-auto px-6 sm:px-10 py-12">
-        <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 xl:grid-cols-3">
-          {pizzas.map((item) => (
-            <MenuCard key={item.id} item={item} showPrice={settings.showPrices} />
-          ))}
+      <main className="bg-[#FDFBF7] pb-16">
+        <div className="max-w-[1800px] mx-auto px-6 sm:px-10 py-12">
+          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 xl:grid-cols-3">
+            {pizzas.map((item) => (
+              <MenuCard key={item.id} item={item} showPrice={settings.showPrices} />
+            ))}
+          </div>
         </div>
       </main>
+
+      <div className="sticky bottom-0 inset-x-0 z-30 bg-[#2B2B2B] border-t border-[#F4A261]/25">
+        <div className="max-w-[1800px] mx-auto px-6 sm:px-10 py-4 flex items-center justify-between gap-4 flex-wrap">
+          <p className="text-white font-medium">
+            Ready to serve these pizzas at your event?
+          </p>
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-[#C84B31] text-white font-bold px-6 py-2.5 shadow-md hover:bg-[#B83B1D] active:scale-[0.99] transition"
+          >
+            Enquire Now →
+          </Link>
+        </div>
+      </div>
+
+      <BrandFooter />
     </div>
   );
 }
 
 function MenuCard({ item, showPrice }: { item: GabriellosMenuItem; showPrice: boolean }) {
   return (
-    <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
-      <div className="relative w-full aspect-[4/3] bg-muted border-b border-border/70 flex items-center justify-center">
+    <div className="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
+      <div className="relative w-full aspect-[4/3] bg-stone-100 border-b border-stone-200 flex items-center justify-center">
         {item.image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover" />
@@ -57,7 +80,7 @@ function MenuCard({ item, showPrice }: { item: GabriellosMenuItem; showPrice: bo
           </div>
         )}
       </div>
-      <div className="p-5">
+      <div className="p-6">
         <div className="flex items-baseline gap-2 flex-wrap justify-between">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span className="text-sm font-mono text-primary font-semibold">№ {item.number}</span>
